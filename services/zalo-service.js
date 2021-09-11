@@ -5,14 +5,14 @@ const OA_DOMAIN = 'https://oauth.zaloapp.com';
 const API_DOMAIN = 'https://graph.zalo.me';
 const OPEN_API_DOMAIN = 'https://openapi.zalo.me'
 
-service.getPermission = () => {
+service.loginOAStep1 = () => {
     return new Promise((resolve, reject) => {
         request({
             url: `${OA_DOMAIN}/v3/permission`,
             method: 'GET',
             qs: {
                 app_id: config.MINI_APP_ID,
-                redirect_uri: '/login',
+                redirect_uri: '/login-oa',
                 state: 'whatever'
             },
             json: true

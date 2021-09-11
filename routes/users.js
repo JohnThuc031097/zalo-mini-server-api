@@ -6,7 +6,9 @@ var router = express.Router();
 
 router.get('/login-oa', async (req, res) => {
 	try {
-		const response = await ZaloService.getPermission();
+		console.log(req.body);
+		return;
+		const response = await ZaloService.loginOAStep1();
 		console.log(response);
 	} catch (ex) {
 		res.send({ error: -1, message: 'Unknown exception' });
