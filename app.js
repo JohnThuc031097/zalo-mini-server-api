@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var cool = require('cool-ascii-faces');
 
 var app = express();
 
@@ -18,7 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
 app.use('/', require('./routes/index'));
-app.get('/cool', (req, res) => res.send(cool()))
 app.use('/users', require('./routes/users'));
 app.use('/products', require('./routes/products'));
 app.use('/orders', require('./routes/orders'));
