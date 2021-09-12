@@ -12,7 +12,7 @@ service.loginOAStep1 = () => {
             method: 'GET',
             qs: {
                 app_id: config.MINI_APP_ID,
-                redirect_uri: '/login-oa',
+                redirect_uri: 'https://localhost:5000/user/login-oa',
                 state: 'whatever'
             },
             json: true

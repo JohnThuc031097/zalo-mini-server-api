@@ -4,21 +4,21 @@ const AuthService = require('../services/auth-service');
 const ZaloService = require('./../services/zalo-service.js');
 var router = express.Router();
 
-router.get('/login-oa', async (req, res) => {
+router.get('/logged-in', AuthService.verify, (req, res) => {
+	return res.send({ error: 0, message: 'Success', data: req.user });
+});
+
+router.post('/login-oa', async (req, res) => {
 	try {
 		console.log(req.body);
-		return;
-		const response = await ZaloService.loginOAStep1();
+		const user = req.body;
+		const response = await ZaloService.loginOAStep1(user);
 		console.log(response);
 	} catch (ex) {
 		res.send({ error: -1, message: 'Unknown exception' });
 		console.log('API-Exception', ex);
 	}
 })
-
-router.get('/logged-in', AuthService.verify, (req, res) => {
-	return res.send({ error: 0, message: 'Success', data: req.user });
-});
 
 router.post('/login', async (req, res) => {
 	try {
