@@ -1,19 +1,16 @@
 const request = require('request');
 const config = require('../config');
 const service = {};
-const OA_DOMAIN = 'https://oauth.zaloapp.com';
 const API_DOMAIN = 'https://graph.zalo.me';
 const OPEN_API_DOMAIN = 'https://openapi.zalo.me'
 
-service.loginOAStep1 = () => {
+service.getAccessToken = (code) => {
     return new Promise((resolve, reject) => {
         request({
-            url: `${OA_DOMAIN}/v3/permission`,
+            url: `${config.SERVER_AUTH}/index.php`,
             method: 'GET',
             qs: {
-                app_id: config.MINI_APP_ID,
-                redirect_uri: 'https://localhost:5000/user/login-oa',
-                state: 'whatever'
+                code
             },
             json: true
         }, (error, response, body) => {

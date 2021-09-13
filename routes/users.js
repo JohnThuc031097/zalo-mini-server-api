@@ -11,8 +11,8 @@ router.get('/logged-in', AuthService.verify, (req, res) => {
 router.post('/login-oa', async (req, res) => {
 	try {
 		console.log(req.body);
-		const user = req.body;
-		const response = await ZaloService.loginOAStep1(user);
+		const code = req.body.code;
+		const response = await ZaloService.getAccessToken(code);
 		console.log(response);
 	} catch (ex) {
 		res.send({ error: -1, message: 'Unknown exception' });
@@ -23,8 +23,7 @@ router.post('/login-oa', async (req, res) => {
 router.post('/login', async (req, res) => {
 	try {
 		const accessToken = req.body.accessToken;
-		if (accessToken === 'NULL') {
-			console.log('API-Exception', 'Access token = NULL');
+		if (!accessToken) {
 			return res.send({ error: -1, message: 'Invalid access token' });
 		}
 		const { id, birthday, name, gender, picture } = await ZaloService.getZaloProfile(accessToken);
