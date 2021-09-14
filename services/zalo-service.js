@@ -4,22 +4,6 @@ const service = {};
 const API_DOMAIN = 'https://graph.zalo.me';
 const OPEN_API_DOMAIN = 'https://openapi.zalo.me'
 
-service.getAccessToken = (code) => {
-    return new Promise((resolve, reject) => {
-        request({
-            url: `${config.SERVER_AUTH}/index.php`,
-            method: 'GET',
-            qs: {
-                code
-            },
-            json: true
-        }, (error, response, body) => {
-            if (error) return reject(error);
-            return resolve(body);
-        });
-    })
-}
-
 service.getZaloProfile = (accessToken) => {
     return new Promise((resolve, reject) => {
         request({
